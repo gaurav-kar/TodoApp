@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+  #Configure service for mongodb container
+  mongodb:
+    container_name: mongodb
+    image: mongo
+    env_file: ./todoapp.env
+    volumes:
+      - tododata:/data/db
+    expose:
+      - 27017
+    restart: unless-stopped
+
+  # Configure service for todoapp container
+  todoapp:
+    container_name: todoapp
+    build: .
+    image: iamgk/todoapp
+    env_file: ./todoapp.env
+    ports:
+      - 2000:2000
+    depends_on:
+      - mongodb
+    restart: unless-stopped
+
+volumes:
+  tododata:

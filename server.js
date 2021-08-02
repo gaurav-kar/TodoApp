@@ -6,12 +6,14 @@ const Todos = require("./database");
 
 //Import Env parameters
 const port = process.env.PORT;
-const DATABASE_URL =
-  "mongodb://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@mongodb:27017/todos?authSource=admin";
+const DATABASE_URL = `mongodb://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@mongodb:27017/todos?authSource=admin`;
 
 //Connect to MongoDB
 mongoose
-  .connect(`${DATABASE_URL}`, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(`${DATABASE_URL}`, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("Database Connected successfully"));
 
 //Express Middlewares
